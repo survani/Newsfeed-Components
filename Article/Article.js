@@ -112,5 +112,18 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+//! Use single quotes only!
 
-//? Step #1 : Function
+//? Step #1
+function articleMaker(infoArticle){
+  //create each .createElement for structure of DOM.
+  const article = document.createElement('div'); //*is creating a div element. It will be used in the .classList.add
+  const title = document.createElement('h2'); //*is creating an h2 element.
+  const date = document.createElement('p'); //*is creating a p element for holding the date. It will be used in the .classList.add
+  const paragraphOne = document.createElement('p'); //*is creating a p element for all three paragraphs that this project will have. 
+  const paragraphTwo = document.createElement('p'); //*Repeat of above.
+  const paragraphThree = document.createElement('p'); //*Repeat of above. 
+  const expandButton = document.createElement('p'); //*is creating a p element for the button that will expand. It will be used in the .classList.add
+
+
+}
