@@ -63,7 +63,8 @@ const data = [
         elit. Raichu Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sandshrew Lorem ipsum dolor sit amet, consectetur adipiscing
         elit. Sandslash Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidoran Lorem ipsum dolor sit amet, consectetur
         adipiscing elit. Nidorina Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidoqueen Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Nidoran Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidorino Lorem ipsum dolor
+        consectetur adipiscing elit. 
+        Nidoran Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidorino Lorem ipsum dolor
         sit amet, consectetur adipiscing elit. Nidoking Lorem ipsum`,
 
     thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel 
@@ -85,18 +86,45 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Learned Compnent 1',
+    date: 'Today',
+    firstParagraph: `It was hard, but I figured it out!`,
+
+    secondParagraph: `Looking to improve!`,
+
+    thirdParagraph: `I want feedback!`
+  },
+  {
+    title: 'Learned Compnent 2',
+    date: 'Today',
+    firstParagraph: `It was hard, but I figured it out!`,
+
+    secondParagraph: `Looking to improve!`,
+
+    thirdParagraph: `I want feedback!`
+  },
+  {
+    title: 'Learned Compnent 3',
+    date: 'Today',
+    firstParagraph: `It was hard, but I figured it out!`,
+
+    secondParagraph: `Looking to improve!`,
+
+    thirdParagraph: `I want feedback!`
   }
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
-  <div class="article"> // variable to use = article (<div></div>)
-    <h2>{title of the article}</h2> // variable to use = title (<h2></h2>)
-    <p class="date">{date of the article}</p> // variable to use = date (<p></p>)
+  <div class="article"> // variable to use = article (<div></div>) (Parent)
+    <h2>{title of the article}</h2> // variable to use = title (<h2></h2>) (child)
+    <p class="date">{date of the article}</p> // variable to use = date (<p></p>) (child)
 
-    {three separate paragraph elements} // variable to use = 'paragraph 1 + 1 + 1' (<p></p> * 3)
+    {three separate paragraph elements} // variable to use = 'paragraph 1 + 1 + 1' (<p></p> * 3) (child)
 
-    <span class='expandButton'></span> variable to use = 'expandButton'(<span></span>)
+    <span class='expandButton'></span> variable to use = 'expandButton'(<span></span>) (child)
   </div>
 
   Hint: You will need to use createElement more than once here!
@@ -115,15 +143,54 @@ const data = [
 //! Use single quotes only!
 
 //? Step #1
-function articleMaker(infoArticle){
+const articleMaker = (dataMachine) => {
   //create each .createElement for structure of DOM.
-  const article = document.createElement('div'); //*is creating a div element. It will be used in the .classList.add
+  const articleContainer = document.createElement('div'); //*is creating a div element. It will be used in the .classList.add
   const title = document.createElement('h2'); //*is creating an h2 element.
   const date = document.createElement('p'); //*is creating a p element for holding the date. It will be used in the .classList.add
   const paragraphOne = document.createElement('p'); //*is creating a p element for all three paragraphs that this project will have. 
   const paragraphTwo = document.createElement('p'); //*Repeat of above.
   const paragraphThree = document.createElement('p'); //*Repeat of above. 
   const expandButton = document.createElement('p'); //*is creating a p element for the button that will expand. It will be used in the .classList.add
+  
+
+  //Adds all the classes in those elements above.
+  articleContainer.classList.add('article'); //* Creates the class 'article' inside the div tag.
+  date.classList.add('date'); //* Creates the class 'date' inside the h2 tag. 
+  expandButton.classList.add('expandButton'); //*Creates the class 'expandButton' inside the span tag.
 
 
-}
+  //Adds all the nodes below eachother and especially article! 
+  articleContainer.appendChild(title); //inside article a div class
+  articleContainer.appendChild(date); //....
+  articleContainer.appendChild(paragraphOne); //....
+  articleContainer.appendChild(paragraphTwo); //....
+  articleContainer.appendChild(paragraphThree); //....
+  articleContainer.appendChild(expandButton); //....
+
+  //Time to add content make sure to grab from data above after data.dataFromAboveHere.
+  //? Format below variableName.textContent = @paramInsideTheArticleMakerFunction.dataFromAbove
+  title.textContent = dataMachine.title;
+  date.textContent = dataMachine.date;
+  paragraphOne.textContent = dataMachine.firstParagraph;
+  paragraphTwo.textContent = dataMachine.secondParagraph;
+  paragraphThree.textContent = dataMachine.thirdParagraph;
+  expandButton.textContent = '\u2B07';
+
+  expandButton.addEventListener('click', e => {
+    articleContainer.classList.toggle('article-open');
+  });
+
+  expandButton.addEventListener('click', e => {
+    articleContainer.classList.toggle('close');
+  });
+
+  return articleContainer;
+
+} //ends function articleMaker
+
+const articles = document.querySelector('.articles');
+
+data.forEach(e => {
+  articles.appendChild(articleMaker(e))
+});
